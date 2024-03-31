@@ -10,11 +10,10 @@ CMD ["/sbin/init"]
 
 STOPSIGNAL SIGRTMIN+3
 
-#ps can be useful in a multi-process container
-RUN systemctl mask systemd-remount-fs.service dev-hugepages.mount sys-fs-fuse-connections.mount systemd-logind.service getty.target console-getty.service && \
+# Align with https://catalog.redhat.com/software/containers/ubi9/ubi-init/615bdc22075b022acc111bf6?architecture=amd64&image=65e0aca88b7d6c2795cea14c&container-tabs=dockerfile
+RUN systemctl mask systemd-remount-fs.service dev-hugepages.mount sys-fs-fuse-connections.mount systemd-logind.service getty.target console-getty.service systemd-udev-trigger.service systemd-udevd.service systemd-random-seed.service systemd-machine-id-commit.service && \
     systemctl disable dnf-makecache.timer dnf-makecache.service && \
     dnf -y install procps-ng && \
     dnf clean all
-# no need to disable systemd-udev-trigger.service systemd-udevd.service, udev is not installed
 
 ADD README.md /
