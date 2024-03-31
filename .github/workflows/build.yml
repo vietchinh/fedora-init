@@ -27,9 +27,9 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: fedora-init
+          images: ${{ matrix.type }}-init
           labels: |
-            org.opencontainers.image.title=fedora-init
+            org.opencontainers.image.title=${{ matrix.type }}-init
       - name: Install latest podman + buildah
         run: |
           sudo mkdir -p /etc/apt/keyrings
@@ -47,8 +47,8 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           containerfiles: ./Containerfile
-          image: fedora-init
-          tags: latest ${{ matrix.packages.version }}
+          image: ${{ matrix.type }}-init
+          tags: latest ${{ matrix.version }}
           labels: ${{ steps.meta.outputs.labels }}
           oci: true
           layers: true
