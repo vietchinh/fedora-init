@@ -3,6 +3,8 @@
 # https://www.reddit.com/r/docker/comments/fy015c/init_systems_in_linux_containers/
 # https://github.com/containers/podman/issues/16923
 # https://github.com/containers/podman/blob/main/libpod/container_internal_linux.go#L195-L306
+ARG FEDORA_VERSION
+
 FROM registry.fedoraproject.org/fedora:${FEDORA_VERSION} as fedora
 
 RUN dnf -y install procps-ng systemd --setopt=install_weak_deps=False --nodocs && \
