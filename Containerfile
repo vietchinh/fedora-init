@@ -30,7 +30,6 @@ WORKDIR /lib/systemd/system/sysinit.target.wants/
 
 # Align with https://catalog.redhat.com/software/containers/ubi9/ubi-init/615bdc22075b022acc111bf6?architecture=amd64&image=65e0aca88b7d6c2795cea14c&container-tabs=dockerfile
 RUN systemctl mask systemd-remount-fs.service dev-hugepages.mount sys-fs-fuse-connections.mount systemd-logind.service getty.target console-getty.service systemd-udev-trigger.service systemd-udevd.service systemd-random-seed.service systemd-machine-id-commit.service && \
-    systemctl disable dnf-makecache.timer dnf-makecache.service && \
     (for i in *; do [ "$i" = "systemd-tmpfiles-setup.service" ] || rm -f "$i"; done); \
     rm -f ../multi-user.target.wants/*;\
     rm -f ../*.wants/*;\
