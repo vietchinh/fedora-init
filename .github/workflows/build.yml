@@ -48,7 +48,7 @@ jobs:
         with:
           containerfiles: ./Containerfile
           image: ${{ matrix.type }}-init
-          tags: latest ${{ matrix.version }}
+          tags: ${{ matrix.version }}
           labels: ${{ steps.meta.outputs.labels }}
           oci: true
           layers: true
