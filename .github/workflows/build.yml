@@ -63,7 +63,7 @@ jobs:
             FEDORA_TYPE=${{ matrix.fedora.type }}
             ${{ matrix.fedora.env }}
           extra-args: |
-            --target ${{ matrix.type }}
+            --target ${{ matrix.fedora.type }}
       - name: Push To GHCR
         uses: redhat-actions/push-to-registry@v2
         id: push
