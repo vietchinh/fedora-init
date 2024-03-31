@@ -6,6 +6,8 @@ ENV NAME=fedora-init VERSION=0.1 RELEASE=1 ARCH=x86_64 container=oci
 
 MAINTAINER vietchinh <1348151+vietchinh@users.noreply.github.com>
 
+# Source: https://www.dogtagpki.org/wiki/Fedora_Container / https://www.reddit.com/r/docker/comments/fy015c/init_systems_in_linux_containers/ / https://github.com/containers/podman/issues/16923 / https://github.com/containers/podman/blob/main/libpod/container_internal_linux.go#L195-L306
+VOLUME ["/sys/fs/cgroup", "/tmp", "/run", "/var/log/journal"]
 CMD ["/sbin/init"]
 
 STOPSIGNAL SIGRTMIN+3
