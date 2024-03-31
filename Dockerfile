@@ -21,7 +21,6 @@ RUN systemctl mask systemd-remount-fs.service dev-hugepages.mount sys-fs-fuse-co
     systemctl disable dnf-makecache.timer dnf-makecache.service && \
     dnf -y install procps-ng --setopt=install_weak_deps=False --nodocs && \
     dnf clean all && \
-    # Source: https://www.dogtagpki.org/wiki/Fedora_Container
     (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
     rm -f /lib/systemd/system/multi-user.target.wants/*;\
     rm -f /etc/systemd/system/*.wants/*;\
