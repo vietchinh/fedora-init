@@ -14,8 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [39, 40]
-        type: [fedora, fedora-minimal]
+        version:
+          - 39
+          - 40
+        fedora:
+          - type: fedora
+            env: FEDORA_PACKAGE_MANAGER=dnf
+          - type: fedora-minimal
+            env: FEDORA_PACKAGE_MANAGER=microdnf
     permissions:
       contents: read
       packages: write
@@ -27,9 +33,9 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ matrix.type }}-init
+          images: ${{ matrix.fedora.type }}-init
           labels: |
-            org.opencontainers.image.title=${{ matrix.type }}-init
+            org.opencontainers.image.title=${{ matrix.fedora.type }}-init
       - name: Install latest podman + buildah
         run: |
           sudo mkdir -p /etc/apt/keyrings
@@ -47,14 +53,15 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           containerfiles: ./Containerfile
-          image: ${{ matrix.type }}-init
+          image: ${{ matrix.fedora.type }}-init
           tags: ${{ matrix.version }}
           labels: ${{ steps.meta.outputs.labels }}
           oci: true
           layers: true
           build-args: |
             FEDORA_VERSION=${{ matrix.version }}
-            FEDORA_TYPE=${{ matrix.type }}
+            FEDORA_TYPE=${{ matrix.fedora.type }}
+            ${{ matrix.fedora.type.env }}
           extra-args: |
             --target ${{ matrix.type }}
       - name: Push To GHCR
