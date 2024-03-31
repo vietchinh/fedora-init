@@ -54,6 +54,7 @@ jobs:
           layers: true
           build-args: |
             FEDORA_VERSION=${{ matrix.version }}
+            FEDORA_TYPE=${{ matrix.type }}
           extra-args: |
             --target ${{ matrix.type }}
       - name: Push To GHCR
