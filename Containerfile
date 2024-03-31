@@ -17,7 +17,7 @@ RUN microdnf -y install procps-ng systemd --setopt=install_weak_deps=False --nod
 #avoid mentioning trademarked docker
 ENV NAME=fedora-init VERSION=0.1 RELEASE=1 ARCH=x86_64 container=oci
 
-MAINTAINER vietchinh <1348151+vietchinh@users.noreply.github.com>
+LABEL maintainer="vietchinh <1348151+vietchinh@users.noreply.github.com>"
 
 VOLUME ["/sys/fs/cgroup", "/tmp", "/run", "/var/log/journal"]
 CMD ["/sbin/init"]
