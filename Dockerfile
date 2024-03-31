@@ -15,9 +15,14 @@ FROM registry.fedoraproject.org/fedora-minimal:${FEDORA_VERSION} as fedora-minim
 RUN microdnf -y install procps-ng systemd --setopt=install_weak_deps=False --nodocs && \
     microdnf clean all
 
+
+FROM post as post
+
+ARG FEDORA_TYPE
+
 #systemd recognizes "container=docker" and does not recognize ocid but it does not make any difference except for the welcome message
 #avoid mentioning trademarked docker
-ENV NAME=fedora-init VERSION=0.1 RELEASE=1 ARCH=x86_64 container=oci
+ENV NAME=${FEDORA_TYPE}-init VERSION=0.1 RELEASE=1 ARCH=x86_64 container=oci
 
 LABEL maintainer="vietchinh <1348151+vietchinh@users.noreply.github.com>"
 
