@@ -4,15 +4,7 @@ FROM fedora:25
 #avoid mentioning trademarked docker
 ENV NAME=fedora-init VERSION=0.1 RELEASE=1 ARCH=x86_64 container=oci
 
-LABEL MAINTAINER "Frantisek Kluknavsky" <fkluknav@redhat.com> \
-	BZComponent="$NAME" \
-	com.redhat.component="$NAME" \
-        Name="$FGC/$NAME" \
-        Version="$VERSION" \
-        Release="$RELEASE.$DISTTAG" \
-        Architecture="$ARCH" \
-	io.k8s.description="Fedora image for running systemd services" \
-	io.k8s.display-name="Fedora systemd out-of-box"
+MAINTAINER vietchinh <1348151+vietchinh@users.noreply.github.com>
 
 CMD ["/sbin/init"]
 
