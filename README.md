@@ -3,15 +3,11 @@ Image to run daemons as systemd units
 
 This image serves as a base image. You can easily build on top of it by installing any daemon packaged in Fedora.
 
-WARNING
--------
-At the time of writing this document, several bugs prevent running this image conveniently on a Fedora 25 host. The following example describes running this Fedora image on a Centos 7 host. Experience on a Fedora host will be hopefully the same in the future.
-
 Usage
 -----
 Let us consider httpd as our daemon of choice in this example. In your Dockerfile, do:
 ```
-FROM fedora-init:25
+FROM fedora-init:39
 RUN dnf -y install httpd && dnf clean all && systemctl enable httpd
 ```
 Build your container:
