@@ -22,7 +22,7 @@ CMD ["/sbin/init"]
 
 STOPSIGNAL SIGRTMIN+3
 
-RUN ${FEDORA_PACKAGE_MANAGER} -y install procps-ng systemd --setopt=install_weak_deps=False --nodocs && \
+RUN ${FEDORA_PACKAGE_MANAGER} -y install procps-ng --setopt=install_weak_deps=False --nodocs && \
     ${FEDORA_PACKAGE_MANAGER} clean all && \
     # Align with https://catalog.redhat.com/software/containers/ubi9/ubi-init/615bdc22075b022acc111bf6?architecture=amd64&image=65e0aca88b7d6c2795cea14c&container-tabs=dockerfile
     systemctl mask systemd-remount-fs.service dev-hugepages.mount sys-fs-fuse-connections.mount systemd-logind.service getty.target console-getty.service systemd-udev-trigger.service systemd-udevd.service systemd-random-seed.service systemd-machine-id-commit.service && \
