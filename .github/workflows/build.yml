@@ -58,6 +58,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           oci: true
           layers: true
+          platforms: linux/amd64, linux/arm64
           build-args: |
             FEDORA_VERSION=${{ matrix.version }}
             FEDORA_TYPE=${{ matrix.fedora.type }}
